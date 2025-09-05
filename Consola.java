@@ -29,7 +29,40 @@ public class Consola{
             Imp.println("");
         }
     }
+    public void disparosMaxDisp(int max, int realizados){
+        Imp.println("Este es el disparo"+ realizados + " de " + max + ".");
+    }
     public void mostrarMensajeJuego(){
-        Imp.println("Comandos\n\tCoordenadas (B3)\n\tREVELAR para mostrar el tablero\n\tSALIR para reiniciar el juego.");
+        Imp.println("Para continuar, por favor haga su selección.\nComandos\n\tCoordenadas (B3)\n\tREVELAR para mostrar el tablero\n\tSALIR para reiniciar el juego.");
+    }
+    public String turnoJuego(Tablero t, int max, int realizados){
+        Imp.println("");
+        disparosMaxDisp(max, realizados);
+        imprimirTablero(t);
+        mostrarMensajeJuego();
+        String respuesta = "";
+        while (respuesta == ""){
+            respuesta = sc.nextLine();
+        }
+        return respuesta;
+    }
+    public void mensajeError(){
+        Imp.println("El comando ingresado no esta dentro de los parámetros válidos.");
+    }
+    public boolean volverAJugar(){
+        Imp.println("¿Desea volver a jugar? (Y/N)");
+        String respuesta = "";
+        while (respuesta != "Y" && respuesta != "N"){
+            Imp.println("Debe escribir (Y) o (N).");
+            respuesta = sc.nextLine();
+        }
+        if (respuesta == "Y") { return true;}
+        else{ return false;}
+    }
+    public void mensajeSalida(){
+        Imp.println("Gracias por haber jugado \\(◦'⌣'◦)/");
+    }
+    public void mensajeLimiteDisparos(){
+        Imp.println("Has perdido ⊙﹏⊙.\nHa alcanzado el límite de disparos máximos.");
     }
 }
