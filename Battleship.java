@@ -17,8 +17,8 @@ public class Battleship{
         this.disparosMaximos = 20;
         this.realizados = 0;
         this.tablerito = new Tablero(barcos, n);
-        for (int i = 0; i < n; i++) {
-            for (int e = 1; e <= n; e++) {
+        for (int i = 1; i < n+1; i++) {
+            for (int e = 1; e <= n+1; e++) {
                 comandosDisponibles.add(String.valueOf((char)('A'+i)) + Integer.toString(e));
             }
         }
@@ -52,28 +52,28 @@ public class Battleship{
                 case "SALIR" -> {
                 }
                 default -> {
-                    if (tablerito.getBarcosActivos() == 0){
+                    if (disparosMaximos == realizados){
                         consolita.mensajeLimiteDisparos();
                         consolita.imprimirTablero(tablerito);
                         if(consolita.volverAJugar()){
                             reiniciar();
                         }
                     }
-                    else{
-                        char coordenada1Letra = respuesta.charAt(0);
-                        int coordenada2Numero = (int)(respuesta.charAt(1))-1;
-                        switch (coordenada1Letra) {
-                            case 'A' -> {
+                    else {
+                        if(tablerito.getBarcosActivos() == 0){
+                            consolita.mensajeVictoria();
+                            consolita.imprimirTablero(tablerito);
+                            if(consolita.volverAJugar()){
+                                reiniciar();
                             }
-                            case 'B' -> {
-                            }
-                            case 'C' -> {
-                            }
-                            case 'D' -> {
-                            }
-                            case 'E' -> {
-                            }
-                            default -> throw new AssertionError();
+                        }
+                        else {
+                            char coordenada1Letra = respuesta.charAt(0);
+                            int coordenada2 = (int)(respuesta.charAt(1))-1;
+                            int coordenada1 = Character.getNumericValue(coordenada1Letra) - Character.getNumericValue('A');
+                            boolean hundido = tablerito.dipararBarco(coordenada1, coordenada2);
+                            consolita.mensajeResultadoDisparo(hundido, tablerito.getBarcosActivos() ,barcos);
+                            turno();
                         }
                     }
                 }

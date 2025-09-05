@@ -65,4 +65,15 @@ public class Consola{
     public void mensajeLimiteDisparos(){
         Imp.println("Has perdido ⊙﹏⊙.\nHa alcanzado el límite de disparos máximos.");
     }
+    public void mensajeVictoria(){
+        Imp.println("Has ganado ☜(⌒▽⌒)☞.\nHa logrado hundir todos los barcos.");
+    }
+    public void mensajeResultadoDisparo(boolean hundido, int activos, int maximo){
+        if (hundido){
+            Imp.println("Ha logrado hundir un barco. Quedan " + activos + " barcos activos de " + maximo + " barcos totales.");
+        }
+        else{
+            Imp.println("No ha hundido ningun barco. Quedan " + activos + " barcos activos de " + maximo + " barcos totales.");
+        }
+    }
 }
